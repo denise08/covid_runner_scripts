@@ -33,7 +33,7 @@ public class CharacterController : MonoBehaviour
 
 
     //display mask count
-    public float numMasks = 0;
+    public static float numMasks = 0;
     public TextMeshProUGUI maskCount;
 
     //slow down collection/damage to ensure properly incremented variables
@@ -41,8 +41,7 @@ public class CharacterController : MonoBehaviour
     bool collected = false;
     bool damaged = false;
 
-    //stats
-    public TextMeshProUGUI itemCount;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -97,6 +96,8 @@ public class CharacterController : MonoBehaviour
         transform.localScale = scale;
     }
 
+
+    //virus damage
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag.Equals("Virus") & !damaged)
@@ -143,8 +144,6 @@ public class CharacterController : MonoBehaviour
         if (collision.CompareTag("level1end"))
         {
             SceneManager.LoadScene(2);  //load stats at end of level 1
-            Debug.Log(numMasks);
-            itemCount.text = "Item Count: " + numMasks.ToString();
             
         }
 
@@ -174,5 +173,6 @@ public class CharacterController : MonoBehaviour
         Debug.Log("ACTUALLY WAITING DONE", gameObject);
         Debug.Log("Done wit stuff", gameObject);
     }
+
 
 }
