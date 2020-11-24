@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CharacterController : MonoBehaviour
 {
@@ -41,11 +42,18 @@ public class CharacterController : MonoBehaviour
     bool collected = false;
     bool damaged = false;
 
-    
+    //stopwatch 
+    public Text timer;
+    public float time;
+    float msec;
+    float sec;
+    float min;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine("stopWatch");
 
         //game over stuff
         gameOverText.SetActive(false);
@@ -143,6 +151,7 @@ public class CharacterController : MonoBehaviour
         //end of level 1
         if (collision.CompareTag("level1end"))
         {
+            StopCoroutine("stopWatch");
             SceneManager.LoadScene(2);  //load stats at end of level 1
             
         }
@@ -172,6 +181,21 @@ public class CharacterController : MonoBehaviour
         damaged = false;
         Debug.Log("ACTUALLY WAITING DONE", gameObject);
         Debug.Log("Done wit stuff", gameObject);
+    }
+
+    IEnumerator stopWatch()
+    {
+        while (true)
+        {
+            time += Time.deltaTime;
+            msec = (int)((time - (int)time) * 100);
+            sec = (int)(time % 60);
+            min = (int)(time / 60 % 60);
+
+            timer.text = string.Format("{0:00}:{1:00}:{2:00}", min, sec, msec);
+
+            yield return null;
+        }
     }
 
 
