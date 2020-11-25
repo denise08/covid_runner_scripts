@@ -45,7 +45,10 @@ public class CharacterController : MonoBehaviour
     //stopwatch 
     public Text timer;
     public float time;
-    public static float finalTime;
+    //public static float finalTime;
+    public static float msecFinal;
+    public static float secFinal;
+    public static float minFinal;
     float msec;
     float sec;
     float min;
@@ -153,8 +156,11 @@ public class CharacterController : MonoBehaviour
         if (collision.CompareTag("level1end"))
         {
             StopCoroutine("stopWatch");
-            finalTime = time;
-            Debug.Log(finalTime);
+            msecFinal = msec;
+            secFinal = sec;
+            minFinal = min;
+            //finalTime = time;
+           // Debug.Log(finalTime);
             SceneManager.LoadScene(2);  //load stats at end of level 1
             
         }
