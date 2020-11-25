@@ -32,4 +32,14 @@ public class RestartButtonScript : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
+
+    public void returnToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void instructions()
+    {
+        SceneManager.LoadScene(4);
+    }
 }

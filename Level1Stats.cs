@@ -10,6 +10,8 @@ public class Level1Stats : MonoBehaviour
     public TextMeshProUGUI itemCountText;
     private float itemCount;
     //private float finishTime;
+
+    //used to display time
     private float msec;
     private float sec;
     private float min;

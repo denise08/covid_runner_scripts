@@ -76,7 +76,7 @@ public class CharacterController : MonoBehaviour
         isGroundedRoad = Physics2D.OverlapCircle(groundCheckOrigin.position, checkRadius, groundLayer);
         isGroundedBlock = Physics2D.OverlapCircle(groundCheckOrigin.position, checkRadius, platformLayer);
 
-        if ((isGroundedRoad || isGroundedBlock) && Input.GetButtonDown("Jump"))
+        if ((isGroundedRoad || isGroundedBlock) && (Input.GetButtonDown("Jump")))
         {
             rb.velocity = Vector2.up * jumpForce;
         } 
