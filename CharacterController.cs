@@ -57,6 +57,7 @@ public class CharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maskCount.text = numMasks.ToString();
         StartCoroutine("stopWatch");
 
         //game over stuff
