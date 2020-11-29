@@ -45,10 +45,17 @@ public class CharacterController : MonoBehaviour
     //stopwatch 
     public Text timer;
     public float time;
-    //public static float finalTime;
+    public static float finalTime;
     public static float msecFinal;
     public static float secFinal;
     public static float minFinal;
+
+    public static float msecFinal2;
+    public static float secFinal2;
+    public static float minFinal2;
+    public static float finalTime2;
+
+
     float msec;
     float sec;
     float min;
@@ -79,6 +86,7 @@ public class CharacterController : MonoBehaviour
 
         if ((isGroundedRoad || isGroundedBlock) && (Input.GetButtonDown("Jump")))
         {
+            SoundManagerScript.PlaySound("jump");
             rb.velocity = Vector2.up * jumpForce;
         } 
         
@@ -117,12 +125,14 @@ public class CharacterController : MonoBehaviour
         {
             if(numMasks == 0)
             {
+                SoundManagerScript.PlaySound("enemyHit");
                 gameOverText.SetActive(true);
                 restartButton.SetActive(true);
                 gameObject.SetActive(false);
             } 
             else
             {
+                SoundManagerScript.PlaySound("enemyHit");
                 damaged = true;
                 numMasks--;
                 maskCount.text = numMasks.ToString();
@@ -137,6 +147,7 @@ public class CharacterController : MonoBehaviour
         //collecting shit
         if (collision.CompareTag("Mask") && !collected)
         {
+            SoundManagerScript.PlaySound("collectItem");
             collected = true;
             print("collected mask");
             numMasks++;
@@ -148,9 +159,16 @@ public class CharacterController : MonoBehaviour
         //reach home
         if (collision.CompareTag("Finish"))
         {
-            winText.SetActive(true);
-            playAgainButton.SetActive(true);
-            gameObject.SetActive(false);
+            StopCoroutine("stopWatch");
+            msecFinal2 = msec;
+            secFinal2 = sec;
+            minFinal2 = min;
+            finalTime2 = time;
+            //winText.SetActive(true);
+            //playAgainButton.SetActive(true);
+            //gameObject.SetActive(false);
+
+            SceneManager.LoadScene(5);
         }
 
         //end of level 1
@@ -160,7 +178,7 @@ public class CharacterController : MonoBehaviour
             msecFinal = msec;
             secFinal = sec;
             minFinal = min;
-            //finalTime = time;
+            finalTime = time;
            // Debug.Log(finalTime);
             SceneManager.LoadScene(2);  //load stats at end of level 1
             
